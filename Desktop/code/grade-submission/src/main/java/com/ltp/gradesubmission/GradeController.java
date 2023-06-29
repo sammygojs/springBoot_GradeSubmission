@@ -19,7 +19,7 @@ public class GradeController {
         // Model.addAttribute(errormsg, "This is the error msg");
         // Grade grade = new Grade("sumit", "cs", "100");
         // Model.addAttribute("grades", studentGrades);
-        Model.addAttribute("grade", new Grade());
+        Model.addAttribute("grade", new Grade("sumit","cs","22"));
         // return "grades";
         return "form";
     }
