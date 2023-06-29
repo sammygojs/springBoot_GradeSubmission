@@ -16,7 +16,7 @@ public class GradeController {
     List<Grade>studentGrades = new ArrayList<>();
 
     @RequestMapping("/")
-    public String getForm(Model Model, @RequestParam(required = false) String name){
+    public String getForm(Model Model, @RequestParam(required = false) String id){
         // Model.addAttribute(errormsg, "This is the error msg");
         // Grade grade = new Grade("sumit", "cs", "100");
         // Model.addAttribute("grades", studentGrades);
@@ -24,10 +24,10 @@ public class GradeController {
         // return "grades";
 
         Grade grade;
-        if(getGradeIndex(name)==-1000){
+        if(getGradeIndex(id)==-1000){
             grade = new Grade();
         }else{
-            grade = studentGrades.get(getGradeIndex(name));
+            grade = studentGrades.get(getGradeIndex(id));
         }
         Model.addAttribute("grade", grade);
         return "form";
@@ -36,10 +36,11 @@ public class GradeController {
     @PostMapping("/handleSubmit")
     public String submitGrade(Grade grade){
             // System.out.println(grade);
-            if(getGradeIndex(grade.getName())==-1000)   {
+            if(getGradeIndex(grade.getId())==-1000)   {
+                System.out.println("Grade ID not found: " +grade.getId());
                 studentGrades.add(grade);
             }else{
-                studentGrades.set(getGradeIndex(grade.getName()), grade);
+                studentGrades.set(getGradeIndex(grade.getId()), grade);
             }
             
             return "redirect:/grades";
@@ -51,9 +52,10 @@ public class GradeController {
         return "grades";
     }
 
-    public Integer getGradeIndex(String name){
+    public Integer getGradeIndex(String id){
         for (int i = 0; i < studentGrades.size(); i++) {
-            if(studentGrades.get(i).getName().equals(name)) return i;
+            System.out.println("current ID: "+studentGrades.get(i).getId());
+            if(studentGrades.get(i).getId().equals(id)) return i;
         }
         return -1000;
     }
