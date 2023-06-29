@@ -24,7 +24,7 @@ public class GradeController {
         // return "grades";
 
         Grade grade;
-        if(getGradeIndex(id)==-1000){
+        if(getGradeIndex(id)==Constants.NOT_FOUND){
             grade = new Grade();
         }else{
             grade = studentGrades.get(getGradeIndex(id));
@@ -57,6 +57,6 @@ public class GradeController {
             System.out.println("current ID: "+studentGrades.get(i).getId());
             if(studentGrades.get(i).getId().equals(id)) return i;
         }
-        return -1000;
+        return Constants.NOT_FOUND;
     }
 }
